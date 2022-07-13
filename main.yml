@@ -3,4 +3,5 @@
   gather_facts: false
   roles:
     - bootstrap
+    - ansible-role-proxmox-nag-removal
     - hostconfig
