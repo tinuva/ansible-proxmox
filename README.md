@@ -8,9 +8,11 @@ I used this set of commands to test the playbook out on a single proxmox VM. It 
 ~~~
 apt update
 apt install git ansible -y
-git clone https://github.com/tinuva/ansible-proxmox.git
+mkdir -p /etc/ansible
 echo "[proxmox]" >> /etc/ansible/hosts
 echo "localhost ansible_host=127.0.0.1 ansible_user=root" >> /etc/ansible/hosts
+git clone https://github.com/tinuva/ansible-proxmox.git
+cd ansible-proxmox
 ansible-playbook main.yml
 ~~~
 
