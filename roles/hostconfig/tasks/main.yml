@@ -28,13 +28,13 @@
     cache_valid_time: 3600
     state: present
 
-- name: configure NAS
-  mount:
-    state: present
-    fstype: cifs
-    opts: rw,username={{ nasuser }},password={{ naspasswd }},vers=2.0
-    src: //{{ nas_ip }}/{{ nas_dir }}
-    name: "{{ mount_pt }}"
+# - name: configure NAS
+#   mount:
+#     state: present
+#     fstype: cifs
+#     opts: rw,username={{ nasuser }},password={{ naspasswd }},vers=2.0
+#     src: //{{ nas_ip }}/{{ nas_dir }}
+#     name: "{{ mount_pt }}"
 
 - name: Enable ipv4 Forwarding in /etc/sysctl.conf
   ansible.builtin.lineinfile:
