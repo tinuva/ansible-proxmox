@@ -54,9 +54,9 @@
       # increase max_user_instances to allow more containers
       fs.inotify.max_user_instances = 1024
 
-- name: get the name of the second interface so we can work with it
-  ansible.builtin.set_fact:
-    second_nic: "{{ ansible_interfaces | difference(['lo',ansible_default_ipv4.alias]) | last }}"
+# - name: get the name of the second interface so we can work with it
+#   ansible.builtin.set_fact:
+#     second_nic: "{{ ansible_interfaces | difference(['lo',ansible_default_ipv4.alias]) | last }}"
 
 - name: Configure /etc/modules to load modules for docker swarm
   ansible.builtin.blockinfile:
@@ -68,19 +68,19 @@
       br_netfilter
       ip_vs
 
-- name: Look at this awful mess to get my macs
-  set_fact:
-    second_mac: "{{ hostvars[inventory_hostname]['ansible_' + second_nic]['macaddress'] }}"
+# - name: Look at this awful mess to get my macs
+#   set_fact:
+#     second_mac: "{{ hostvars[inventory_hostname]['ansible_' + second_nic]['macaddress'] }}"
 
-- name: Conveniently rename interfaces
-  ansible.builtin.lineinfile:
-    dest: /etc/udev/rules.d/10-network.rules
-    regexp: 'SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ second_mac }}", NAME="eno2"'
-    line: 'SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ second_mac }}", NAME="eno2"'
-    create: yes
-    owner: root
-    group: root
-    mode: '0644'
+# - name: Conveniently rename interfaces
+#   ansible.builtin.lineinfile:
+#     dest: /etc/udev/rules.d/10-network.rules
+#     regexp: 'SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ second_mac }}", NAME="eno2"'
+#     line: 'SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ second_mac }}", NAME="eno2"'
+#     create: yes
+#     owner: root
+#     group: root
+#     mode: '0644'
 
 - name: upgrade distribution
   ansible.builtin.apt:
