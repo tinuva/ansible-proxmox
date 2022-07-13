@@ -2,7 +2,7 @@
 
 - name: Add specified repository from sources list
   ansible.builtin.apt_repository:
-    repo: deb http://security.debian.org/debian-security {{ ansible_distribution_release }}-security main contrib
+    repo: deb http://security.debian.org/debian-security bullseye-security main contrib
     state: present
 
 - name: install openvswitch
